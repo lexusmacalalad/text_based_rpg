@@ -1,12 +1,7 @@
-import character_class
+import functions.main_menu_functions as functions
 
-def new_game():
-    char_name = input("Greetings adventurer, you are the last hope of the kingdom of Yggdra. Could you please tell me your name?\n")
-    print("The Kingdon of Yggdra is very thankful to have a brave adventurer like you, " + char_name)
+functions.introduction()
 
-    return character_class.Character(char_name)
+functions.exit_game()
+# functions.new_game()
 
-
-character = new_game()
-
-print(character.health)
