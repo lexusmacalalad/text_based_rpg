@@ -41,4 +41,5 @@ def spawn_enemy():
     else:
         return "Lucifer the Behemoth"
 
-
+def draw():
+    print("xX-----------------Xx")

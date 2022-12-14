@@ -1,4 +1,8 @@
 from random import randint
+import sys
+
+sys.path.append('../functions')
+import functions.main_menu_functions as functions
 
 class Character:
     max_health = 50
@@ -16,10 +20,23 @@ class Character:
         self.level += 1;
         self.exp_to_lvl = int(self.exp_to_lvl + (self.exp_to_lvl * 0.25))
         self.exp = 0
-        self.health += 5
+        self.max_health += 5
+        self.health = self.max_health
         self.attack += 1
 
         return self
+
+    def show_stats(self):
+        functions.draw()
+        print(
+            f"  Name: {self.name}",
+            f"  Health: {self.health}/{self.max_health}",
+            f"  Experience: {self.exp}/{self.exp_to_lvl}",
+            f"  Attack: {self.attack}",
+            f"  Inventory: {self.inventory}",
+            sep = "\n"
+            )
+        functions.draw()
 
 
 # *** MONSTER CLASSES ***
