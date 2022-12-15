@@ -8,15 +8,22 @@ import random
 sys.path.append('../classes')
 import classes.classes as class_objects
 
+# sys.path.append('../src')
+# import src.main as char_class
+
 # *** SYSTEM ***
 def clear():
     """To clear out terminal screen"""
     os.system('clear')
 
+def enter():
+    input("Press enter to continue.")
+
 # *** MAIN MENU ***
 def introduction():
     intro = "Yggdra, once was a peaceful kingdom, until one day. Lucifer the Behemoth has appeared from the depths of hell and devoured everything in its path. As the kingdom nears its demise, you have volunteered to put an end to the endless suffering of the remaining population of Yggdra.\n"
-    # To add typewriter effect on introduction
+
+    # Add typewriter effect on introduction
     for char in intro:
         sleep(0.02)
         print(char, end='', flush=True)
@@ -33,17 +40,55 @@ def new_game():
     return class_objects.Character(char_name)
 
 def load_game():
+    """Loads previously saved game"""
     pass
+
+def instructions():
+    clear()
+    instruction = "You have been tasked to defeat the king of hell, Lucifer the Behemoth. Throughout your journey, you will encounter monsters that will help you get stronger. Defeating these monsters will allow you to level up, boosting your stats, as well as a chance to receive health potions that can heal you.\n \nThis game is inspired by the souls series games from From Software, therefore it will be challenging to beat, based on your luck. Lower tier monsters have a higher chance to spawn, whereas stronger monsters have a higher chance to spawn as you traverse the map. Choose your actions wisely as you will not be able to run away from Lucifer once you encounter him. You might need to play this game a few times to learn which monsters are weak, and which ones you should take earlier on to get stronger.\n \nYou will be prompted actions by the game, and which option to choose is up to you. Choose wisely! Good luck out there, adventurer.\n"
+    
+    # Add type writer effect to instruction
+    for char in instruction:
+        sleep(0.02)
+        print(char, end='', flush=True)
+
+    enter()
+    clear()
 
 def exit_game():
     """Closes the program completely"""
-    print("Thank you for playing Tales of Yggdra. See you back soon, hero!")
+    print("Thank you for playing Tales of Yggdra. See you back soon, adventurer!")
     quit
 
 # *** GAME ***
 def save_game(): # ####### COMPLETE THIS LATER #########
     """Saves current progression of the player"""
     f = open("load.txt", "w")
+    print("You have saved your progress.")
+
+# *** MAP MOVEMENT ***
+# def move():
+#     move = True
+
+#     while move:
+#         clear()
+#         # char_class.character.show_stats()
+#         movement = input("[1] North\n [2] East\n [3] South\n [4] West\n [5] Back")
+
+#         if movement == "1":
+#             pass
+#         elif movement == "2":
+#             pass
+#         elif movement == "3":
+#             pass
+#         elif movement == "4":
+#             pass
+#         elif movement == "5":
+#             move = False
+#             # char_class.game = True
+#             pass
+#         else:
+#             print("You have entered the wrong input")
 
 
 
