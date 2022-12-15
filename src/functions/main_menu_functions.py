@@ -6,7 +6,7 @@ from random import randint, random
 import random
 
 sys.path.append('../classes')
-import classes as class_objects
+import classes.classes as class_objects
 
 # *** SYSTEM ***
 def clear():
@@ -21,20 +21,31 @@ def introduction():
         sleep(0.02)
         print(char, end='', flush=True)
 
-    enter = input("Press enter to start your journey!")
+    input("Press enter to start your journey!")
     clear()
 
-
 def new_game():
+    """Creates a new game"""
     char_name = input("Greetings adventurer, you are the last hope of the kingdom of Yggdra. Could you please tell me your name?\n")
-    os.system('clear')
+    clear()
     print("The Kingdon of Yggdra is very thankful to have a brave adventurer like you, " + char_name + "!")
     
     return class_objects.Character(char_name)
 
+def load_game():
+    pass
+
 def exit_game():
-    print("Thank you for playing Tales of Yggdra. See you back here soon!")
+    """Closes the program completely"""
+    print("Thank you for playing Tales of Yggdra. See you back soon, hero!")
     quit
+
+# *** GAME ***
+def save_game(): # ####### COMPLETE THIS LATER #########
+    """Saves current progression of the player"""
+    f = open("load.txt", "w")
+
+
 
 # *** ENEMY SPAWN ***
 def spawn_enemy():
