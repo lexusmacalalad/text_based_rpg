@@ -6,10 +6,10 @@ from random import randint, random
 import random
 
 sys.path.append('../classes')
-import classes.classes as class_objects
+from classes.classes import *
 
 # sys.path.append('../src')
-# import src.main as char_class
+# import main as char_class
 
 # *** SYSTEM ***
 def clear():
@@ -37,7 +37,7 @@ def new_game():
     clear()
     print("The Kingdon of Yggdra is very thankful to have a brave adventurer like you, " + char_name + "!")
     
-    return class_objects.Character(char_name)
+    return Character(char_name)
 
 def load_game():
     """Loads previously saved game"""
@@ -45,7 +45,7 @@ def load_game():
 
 def instructions():
     clear()
-    instruction = "You have been tasked to defeat the king of hell, Lucifer the Behemoth. Throughout your journey, you will encounter monsters that will help you get stronger. Defeating these monsters will allow you to level up, boosting your stats, as well as a chance to receive health potions that can heal you.\n \nThis game is inspired by the souls series games from From Software, therefore it will be challenging to beat, based on your luck. Lower tier monsters have a higher chance to spawn, whereas stronger monsters have a higher chance to spawn as you traverse the map. Choose your actions wisely as you will not be able to run away from Lucifer once you encounter him. You might need to play this game a few times to learn which monsters are weak, and which ones you should take earlier on to get stronger.\n \nYou will be prompted actions by the game, and which option to choose is up to you. Choose wisely! Good luck out there, adventurer.\n"
+    instruction = "You have been tasked to defeat the king of hell, Lucifer the Behemoth. Throughout your journey, you will encounter monsters that will help you get stronger. Defeating these monsters will allow you to level up, boosting your stats, as well as a chance to receive health potions that can heal you.\n \nThis game is inspired by the souls series games from From Software, therefore it will be challenging to beat, based on your luck in spawning monsters. Lower tier monsters have a higher chance to spawn, whereas stronger monsters have a higher chance to spawn as you traverse the map. Choose your actions wisely as you will not be able to run away from Lucifer once you encounter him. You might need to play this game a few times to learn which monsters are weak, and which ones you should take earlier on to get stronger.\n \nYou will be prompted actions by the game, and which option to choose is up to you. Choose wisely! Good luck out there, adventurer.\n"
     
     # Add type writer effect to instruction
     for char in instruction:
@@ -67,28 +67,26 @@ def save_game(): # ####### COMPLETE THIS LATER #########
     print("You have saved your progress.")
 
 # *** MAP MOVEMENT ***
-# def move():
-#     move = True
+def move():
+    move = True
 
-#     while move:
-#         clear()
-#         # char_class.character.show_stats()
-#         movement = input("[1] North\n [2] East\n [3] South\n [4] West\n [5] Back")
+    while move:
+        clear()
+        # char_class.character.show_stats()
+        movement = input("[1] North\n[2] East\n[3] South\n[4] West\n[5] Back\n")
 
-#         if movement == "1":
-#             pass
-#         elif movement == "2":
-#             pass
-#         elif movement == "3":
-#             pass
-#         elif movement == "4":
-#             pass
-#         elif movement == "5":
-#             move = False
-#             # char_class.game = True
-#             pass
-#         else:
-#             print("You have entered the wrong input")
+        if movement == "1":
+            pass
+        elif movement == "2":
+            pass
+        elif movement == "3":
+            pass
+        elif movement == "4":
+            pass
+        elif movement == "5":
+            move = False
+        else:
+            print("You have entered the wrong input")
 
 
 
@@ -108,42 +106,42 @@ def spawn_enemy():
 def create_enemy():
     """Creates a monster instance based on enemy spawned"""
     
-    enemy = spawn_enemy()
+    enemy = spawn_enemy(Monster)
     
     # Goblin Class
     if enemy == "Small Goblin":
-        return class_objects.Monster("Small Goblin", 15, 3, {"Health Potion": 1}, 5)
+        return Monster("Small Goblin", 15, 3, {"Health Potion": 1}, 5)
     elif enemy == "Higher Goblin":
-        return class_objects.Monster("Higher Goblin", 23, 9, {"Health Potion": 2}, 13)
+        return Monster("Higher Goblin", 23, 9, {"Health Potion": 2}, 13)
     elif enemy == "Marauder":
-        return class_objects.Monster("Marauder", 65, 20, {"Health Potion": 3}, 25)
+        return Monster("Marauder", 65, 20, {"Health Potion": 3}, 25)
 
     # Golem Class
     elif enemy == "Earth Golem":
-        return class_objects.Monster("Earth Golem", 20, 2, {"Health Potion": 1}, 6)
+        return Monster("Earth Golem", 20, 2, {"Health Potion": 1}, 6)
     elif enemy == "Stone Golem":
-        return class_objects.Monster("Stone Golem", 40, 5, {"Health Potion": 1}, 15)
+        return Monster("Stone Golem", 40, 5, {"Health Potion": 1}, 15)
     elif enemy == "The Colossus":
-        return class_objects.Monster("The Colossus", 80, 14, {"Health Potion": 2}, 23)
+        return Monster("The Colossus", 80, 14, {"Health Potion": 2}, 23)
     
     # Reptilian Class
     elif enemy == "Brown Python":
-        return class_objects.Monster("Brown Python", 12, 5, "No items", 7)
+        return Monster("Brown Python", 12, 5, "No items", 7)
     elif enemy == "Spiked Turtoise":
-        return class_objects.Monster("Spiked Turtoise", 30, 6, {"Health Potion": 2}, 15)
+        return Monster("Spiked Turtoise", 30, 6, {"Health Potion": 2}, 15)
     elif enemy == "Flame Dragon":
-        return class_objects.Monster("Flame Dragon", 50, 25, {"Health Potion": 2}, 30)
+        return Monster("Flame Dragon", 50, 25, {"Health Potion": 2}, 30)
     
     # Human Class
     elif enemy == "Peasant":
-        return class_objects.Monster("Peasant", 8, 2, "No items", 3)
+        return Monster("Peasant", 8, 2, "No items", 3)
     elif enemy == "Outcast":
-        return class_objects.Monster("Outcast", 10, 2, "No items", 5)
+        return Monster("Outcast", 10, 2, "No items", 5)
     elif enemy == "Barbarian":
-        return class_objects.Monster("Barbarian", 20, 10, {"Health Potion": 2}, 15)
+        return Monster("Barbarian", 20, 10, {"Health Potion": 2}, 15)
 
     # Boss Class
     else:
-        return class_objects.Monster("Lucifer the Behemoth", 250, 35, "No items", 0)
+        return Monster("Lucifer the Behemoth", 250, 35, "No items", 0)
 
 

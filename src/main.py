@@ -15,7 +15,6 @@ while run:
     # *** MAIN MENU ***
     while menu:
         main_choice = input("Please select the following options.\n [1] Start New Game\n [2] Load Game\n [3] How to Play\n [4] Exit Game\n")
-        import functions.main_menu_functions as functions
         functions.clear()
 
         if main_choice == "1":
@@ -52,8 +51,9 @@ while run:
 
         if game_menu == "1":
             pass
-            # game = False
-            # functions.move()
+            game = False
+            functions.move()
+            game = True
 
         elif game_menu == "2":
             character.use_potion()
