@@ -5,8 +5,8 @@ from tabulate import tabulate
 sys.path.append('../functions')
 import functions.main_menu_functions as functions
 
-sys.path.append('../../src')
-import main as char_class
+# sys.path.append('../../src')
+# import main as char_class
 
 class Character:
     max_health = 50
@@ -67,14 +67,14 @@ class Monster:
         self.spoils = spoils
         self.exp_given = exp_given
 
-    def fight(self):
+    def fight(self, character):
         while self.health > 0:
-            char_class.character.health = char_class.character.health - randint(1,(self.attack * 2))
-            print(char_class.character.health)
-            self.health -= char_class.character.attack
+            character.health = character.health - self.attack
+            print(character.health)
+            self.health -= character.attack
 
         print(f"You've defeated {self.name}. You have gained {self.exp_given} experience!")
-        return char_class.character
+        return character
 
 
 
