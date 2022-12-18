@@ -1,11 +1,12 @@
 from time import sleep
-import sys
 from random import randint, random
 # imported random twice as the one above wouldn't let me explicitly import the random function "choice"
 import random
 
-import classes
-import system_func
+import functions.classes as classes
+import functions.system_func as system_func
+import sys
+
 
 # *** MAIN MENU ***
 def introduction():
@@ -21,11 +22,14 @@ def introduction():
 
 def new_game():
     """Creates a new game"""
+    global character
     char_name = input("Greetings adventurer, you are the last hope of the kingdom of Yggdra. Could you please tell me your name?\n")
     system_func.clear()
     print("The Kingdon of Yggdra is very thankful to have a brave adventurer like you, " + char_name + "!")
-    
-    return classes.Character(char_name)
+    character = classes.Character(char_name)
+    print("Your starting stats are:")
+    character.show_stats()
+    system_func.enter()
 
 def load_game():
     """Loads previously saved game"""
@@ -60,11 +64,13 @@ def move():
 
     while move:
         system_func.clear()
-        # char_class.character.show_stats()
         movement = input("[1] North\n[2] East\n[3] South\n[4] West\n[5] Back\n")
 
         if movement == "1":
-            pass
+            if randint(1, 100) <= 80:
+                made_enemy = create_enemy()
+                made_enemy.fight(character)
+                system_func.enter()
         elif movement == "2":
             pass
         elif movement == "3":
@@ -76,7 +82,12 @@ def move():
         else:
             print("You have entered the wrong input")
 
-
+# *** FIND POTION ***
+def find_potion(character):
+    system_func.clear()
+    print("You stumble upon a destroyed caravan and found a healing potion!")
+    character.inventory["Health Potion"] += 1
+    system_func.enter()
 
 # *** ENEMY SPAWN ***
 def spawn_enemy():
@@ -131,6 +142,3 @@ def create_enemy():
     # Boss Class
     else:
         return classes.Monster("Lucifer the Behemoth", 250, 35, "No items", 0)
-
-made_enemy = create_enemy()
-made_enemy.show_stats()

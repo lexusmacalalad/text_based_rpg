@@ -2,7 +2,7 @@ from random import randint
 import sys
 from tabulate import tabulate
 
-import system_func
+import functions.system_func as system_func
 
 
 class Character:
@@ -11,7 +11,7 @@ class Character:
     level = 1
     exp_to_lvl = 20
     exp = 0
-    attack = 4
+    attack = 500
     inventory = {"Health Potion": 2}
 
     def __init__(self, name):
@@ -66,11 +66,23 @@ class Monster:
 
     def fight(self, character):
         while self.health > 0:
+            character.show_stats()
             character.health = character.health - self.attack
-            print(character.health)
+            print(f"You attacked {self.health} with {character.attack}")
+            system_func.enter()
             self.health -= character.attack
+            print(f"{self.name} attacked you for {self.attack} damage.")
+            system_func.enter()
 
+            if self.name == "Lucifer the Behemoth":
+                print("The Kingdom of Yggdra cannot thank you enough adventurer. Thank you for accepting this quest and defeating Lucifer the Behemoth. You have saved our kingdom from Perill.")
+                
         print(f"You've defeated {self.name}. You have gained {self.exp_given} experience!")
+        Character.exp += self.exp_given
+        if Character.exp > Character.exp_to_lvl:
+            character.level_up()
+            print("You leveled up and grew stronger. You might be able to take on the demon king soon.")
+            character.show_stats()
         return character
     
     def show_stats(self):
