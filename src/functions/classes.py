@@ -11,7 +11,7 @@ class Character:
     level = 1
     exp_to_lvl = 20
     exp = 0
-    attack = 5
+    attack = 3
     inventory = {"Health Potion": 2}
 
     def __init__(self, name):
@@ -38,7 +38,7 @@ class Character:
 
     def level_up(self):
         self.level += 1;
-        self.exp_to_lvl = int(self.exp_to_lvl + (self.exp_to_lvl * 0.25))
+        self.exp_to_lvl = int(self.exp_to_lvl + (self.exp_to_lvl * 0.60))
         self.exp = 0
         self.max_health += 5
         self.health = self.max_health
@@ -65,7 +65,6 @@ class Monster:
         self.exp_given = exp_given
 
     def fight(self, character):
-        fight = True
         while self.health > 0:
             system_func.clear()
             character.show_stats()
@@ -81,17 +80,19 @@ class Monster:
                 print(f"{self.name} attacked you for {self.attack} damage.")
                 system_func.enter()
 
+                if character.health <= 0:
+                    system_func.clear()
+                    character.show_stats()
+                    print("You have died. Try again next time.")
+                    quit()
+
                 if self.name == "Lucifer the Behemoth":
+                    system_func.clear()
                     print("The Kingdom of Yggdra cannot thank you enough adventurer. Thank you for accepting this quest and defeating Lucifer the Behemoth. You have saved our kingdom from Perill.")
-                    quit
-                
-                elif self.name != "Lucifer the Behemoth":
-                    print(f"You've defeated {self.name}. You have gained {self.exp_given} experience!")
-                    Character.exp += self.exp_given
-                    if Character.exp >= Character.exp_to_lvl:
-                        character.level_up()
-                        print("You leveled up and grew stronger. You might be able to take on the demon king soon.")
-                        character.show_stats()
+                    system_func.enter()
+                    quit()
+
+
             
             elif fight == "2":
                 character.use_potion()
@@ -102,14 +103,24 @@ class Monster:
                 
                 else:
                     system_func.clear()
-                    print("You have fled")
+                    print(f"You have fled from {self.name}")
                     system_func.enter()
-                    fight = False
-                    break
+                    continue
+
             
             else:
                 print("That is not the correct input.")
-       
+
+        system_func.clear()
+        print(f"You've defeated {self.name}. You have gained {self.exp_given} experience!")
+        character.exp += self.exp_given
+        system_func.enter()
+        if character.exp >= character.exp_to_lvl:
+            system_func.clear()
+            character.level_up()
+            print("You leveled up and grew stronger. You might be able to take on the demon king soon.")
+            character.show_stats()
+            system_func.enter()
         return character
     
     def show_stats(self):

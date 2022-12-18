@@ -50,7 +50,7 @@ def instructions():
 def exit_game():
     """Closes the program completely"""
     print("Thank you for playing Tales of Yggdra. See you back soon, adventurer!")
-    quit
+    quit()
 
 # *** GAME ***
 def save_game(): # ####### COMPLETE THIS LATER #########
@@ -65,24 +65,14 @@ def move():
     while move:
         system_func.clear()
         character.show_stats()
-        movement = input("[1] North\n[2] East\n[3] South\n[4] West\n[5] Back\n")
 
-        if movement == "1":
-            if randint(1, 100) <= 80:
-                made_enemy = create_enemy()
-                print(f"You hear something silently approaching. {made_enemy.name} ambushes you! Select your action.")
-                system_func.enter()
-                made_enemy.fight(character)
-        elif movement == "2":
-            pass
-        elif movement == "3":
-            pass
-        elif movement == "4":
-            pass
-        elif movement == "5":
+        if randint(1, 100) <= 80:
+            system_func.clear()
+            made_enemy = create_enemy()
+            print(f"You hear something silently approaching. {made_enemy.name} ambushes you! Select your action.")
+            system_func.enter()
+            made_enemy.fight(character)
             move = False
-        else:
-            print("You have entered the wrong input")
 
 # *** FIND POTION ***
 def find_potion(character):
@@ -108,7 +98,7 @@ def create_enemy():
     """Creates a monster instance based on enemy spawned"""
     
     enemy = spawn_enemy()
-    
+
     # Goblin Class
     if enemy == "Small Goblin":
         return classes.Monster("Small Goblin", 15, 3, {"Health Potion": 1}, 5)
