@@ -1,12 +1,4 @@
 import os
-# from functions.main_menu_functions import *
-# from functions.system_func import *
-# from functions.classes import *
-
-# import functions.main_menu_functions as functions
-# import functions.system_func as system_func
-# import functions.classes
-
 import functions.classes as classes
 import functions. main_menu_functions as functions
 import functions.system_func as system_func
@@ -17,7 +9,7 @@ game = False
 move = False
 
 while run:
-    os.system('clear')
+    system_func.clear()
     # functions.introduction()
 
     # *** MAIN MENU ***

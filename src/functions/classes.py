@@ -84,6 +84,7 @@ class Monster:
                     system_func.clear()
                     character.show_stats()
                     print("You have died. Try again next time.")
+                    system_func.enter()
                     quit()
 
                 if self.name == "Lucifer the Behemoth":
