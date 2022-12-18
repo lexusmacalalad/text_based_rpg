@@ -92,9 +92,7 @@ class Monster:
                     print("The Kingdom of Yggdra cannot thank you enough adventurer. Thank you for accepting this quest and defeating Lucifer the Behemoth. You have saved our kingdom from Perill.")
                     system_func.enter()
                     quit()
-
-
-            
+  
             elif fight == "2":
                 character.use_potion()
 
@@ -108,7 +106,6 @@ class Monster:
                     system_func.enter()
                     continue
 
-            
             else:
                 print("That is not the correct input.")
 
@@ -126,6 +123,3 @@ class Monster:
     
     def show_stats(self):
         print(self.name, self.health, self.attack, self.spoils, self.exp_given)
-
-
-

@@ -10,7 +10,7 @@ move = False
 
 while run:
     system_func.clear()
-    # functions.introduction()
+    functions.introduction()
 
     # *** MAIN MENU ***
     while menu:
