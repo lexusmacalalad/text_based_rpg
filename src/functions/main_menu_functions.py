@@ -64,13 +64,15 @@ def move():
 
     while move:
         system_func.clear()
+        character.show_stats()
         movement = input("[1] North\n[2] East\n[3] South\n[4] West\n[5] Back\n")
 
         if movement == "1":
             if randint(1, 100) <= 80:
                 made_enemy = create_enemy()
-                made_enemy.fight(character)
+                print(f"You hear something silently approaching. {made_enemy.name} ambushes you! Select your action.")
                 system_func.enter()
+                made_enemy.fight(character)
         elif movement == "2":
             pass
         elif movement == "3":

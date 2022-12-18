@@ -11,7 +11,7 @@ class Character:
     level = 1
     exp_to_lvl = 20
     exp = 0
-    attack = 500
+    attack = 5
     inventory = {"Health Potion": 2}
 
     def __init__(self, name):
@@ -23,7 +23,7 @@ class Character:
                 self.health += 15
                 self.inventory["Health Potion"] -= 1
                 system_func.clear()
-                print("You used 1 potion healed for 15 health points!")
+                print("You used 1 potion and healed for 15 health points!")
                 system_func.enter()
                 if self.health > self.max_health:
                     self.health = self.max_health
@@ -49,7 +49,7 @@ class Character:
     def show_stats(self):
         """Show player stats as table format"""
         
-        table = [["Name ", self.name], ["Health ", f"{self.health}/{self.max_health}"], ["Experience ", f"{self.exp}/{self.exp_to_lvl}"], ["Attack ", self.attack], ["Health Potions", self.inventory["Health Potion"]]]
+        table = [["Name ", self.name], ["Health ", f"{self.health}/{self.max_health}"], ["Level", self.level], ["Experience ", f"{self.exp}/{self.exp_to_lvl}"], ["Attack ", self.attack], ["Health Potions", self.inventory["Health Potion"]]]
 
         print(tabulate(table, tablefmt = "simple_grid"))
 
@@ -65,24 +65,51 @@ class Monster:
         self.exp_given = exp_given
 
     def fight(self, character):
+        fight = True
         while self.health > 0:
+            system_func.clear()
             character.show_stats()
-            character.health = character.health - self.attack
-            print(f"You attacked {self.health} with {character.attack}")
-            system_func.enter()
-            self.health -= character.attack
-            print(f"{self.name} attacked you for {self.attack} damage.")
-            system_func.enter()
+            fight = input("[1] Fight\n[2] Use Potion\n[3] Flee\n")
 
-            if self.name == "Lucifer the Behemoth":
-                print("The Kingdom of Yggdra cannot thank you enough adventurer. Thank you for accepting this quest and defeating Lucifer the Behemoth. You have saved our kingdom from Perill.")
+            if fight == "1":
+                system_func.clear()
+                character.show_stats()
+                character.health = character.health - self.attack
+                print(f"You attacked {self.name} with {character.attack}")
+                system_func.enter()
+                self.health -= character.attack
+                print(f"{self.name} attacked you for {self.attack} damage.")
+                system_func.enter()
+
+                if self.name == "Lucifer the Behemoth":
+                    print("The Kingdom of Yggdra cannot thank you enough adventurer. Thank you for accepting this quest and defeating Lucifer the Behemoth. You have saved our kingdom from Perill.")
+                    quit
                 
-        print(f"You've defeated {self.name}. You have gained {self.exp_given} experience!")
-        Character.exp += self.exp_given
-        if Character.exp > Character.exp_to_lvl:
-            character.level_up()
-            print("You leveled up and grew stronger. You might be able to take on the demon king soon.")
-            character.show_stats()
+                elif self.name != "Lucifer the Behemoth":
+                    print(f"You've defeated {self.name}. You have gained {self.exp_given} experience!")
+                    Character.exp += self.exp_given
+                    if Character.exp >= Character.exp_to_lvl:
+                        character.level_up()
+                        print("You leveled up and grew stronger. You might be able to take on the demon king soon.")
+                        character.show_stats()
+            
+            elif fight == "2":
+                character.use_potion()
+
+            elif fight == "3":
+                if self.name == "Lucifer the Behemoth":
+                    print("You cannot run away from the demon king")
+                
+                else:
+                    system_func.clear()
+                    print("You have fled")
+                    system_func.enter()
+                    fight = False
+                    break
+            
+            else:
+                print("That is not the correct input.")
+       
         return character
     
     def show_stats(self):
